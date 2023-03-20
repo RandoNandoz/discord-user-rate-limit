@@ -123,13 +123,13 @@ async def on_message(message: discord.Message):
         if "global" in db_user["limits"]:
             if (message.created_at - db_user["last_message"]).total_seconds() < db_user["limits"]["global"]:
                 await message.delete()
-                await user.send(f"You are in server-wide slowmode for {db_user['limits']['global']} seconds")
+                # await user.send(f"You are in server-wide slowmode for {db_user['limits']['global']} seconds")
         if str(message.channel.id) in db_user["limits"]:
             if (message.created_at - db_user["last_message"]).total_seconds() < db_user["limits"][
                 str(message.channel.id)]:
                 await message.delete()
-                await user.send(
-                    f"You are in slowmode for {db_user['limits'][str(message.channel.id)]} seconds in channel {message.channel.mention}")
+                # await user.send(
+                #     f"You are in slowmode for {db_user['limits'][str(message.channel.id)]} seconds in channel {message.channel.mention}")
     await bot.process_commands(message)
 
 
