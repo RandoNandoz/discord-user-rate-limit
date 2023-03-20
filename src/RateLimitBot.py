@@ -19,7 +19,7 @@ db = mongo_client["ratelimitbot"]
 rate_limited_users = db["rate_limited_users"]
 
 
-@bot.slash_command(name="add_user_slowmode")
+@bot.slash_command(name="add_user_slowmode", description="Add a user to slowmode")
 @default_permissions(manage_channels=True)
 async def add_user_slowmode(ctx: discord.ApplicationContext,
                             user: discord.Option(discord.User, description="The user to slowmode", required=True),
@@ -53,14 +53,14 @@ async def add_user_slowmode(ctx: discord.ApplicationContext,
                 await ctx.respond(f"Added {user} to slowmode for {time} seconds")
 
 
-@bot.slash_command(name="remove_all_slowmode")
+@bot.slash_command(name="remove_all_slowmode", description="Remove all users from slowmode")
 @default_permissions(manage_channels=True)
 async def remove_all_slowmode(ctx: discord.ApplicationContext):
     rate_limited_users.delete_many({})
     await ctx.respond("Removed all users from slowmode")
 
 
-@bot.slash_command(name="remove_user_slowmode")
+@bot.slash_command(name="remove_user_slowmode", description="Remove a user from slowmode")
 @default_permissions(manage_channels=True)
 async def remove_user_slowmode(ctx: discord.ApplicationContext,
                                user: discord.Option(discord.User, description="The user to remove from slowmode"),
@@ -82,7 +82,7 @@ async def remove_user_slowmode(ctx: discord.ApplicationContext,
         await ctx.respond(f"Removed {user} from slowmode")
 
 
-@bot.slash_command(name="list_slowmode_users")
+@bot.slash_command(name="list_slowmode_users", description="List all users in slowmode")
 @default_permissions(manage_channels=True)
 async def list_slowmode_users(ctx: discord.ApplicationContext):
     users = rate_limited_users.find({})
